@@ -21,12 +21,10 @@ def index():
     return "Jst srvr"
 
 @app.route('/api/get')
-@cross_origin()
 def slangsGet():
     return json.dumps({'status': '200', 'data': db.session.execute("SELECT * FROM slangs")})
 
 @app.route('/api/add', methods=['POST'])
-@cross_origin()
 def slangAdd():
     data = json.loads(request.data.decode('utf-8'))
     label = data["label"]
@@ -39,7 +37,6 @@ def slangAdd():
     return json.dumps({'status': '200'})
 
 @app.route('/api/del', methods=['POST'])
-@cross_origin()
 def slangDelete():
     id = json.loads(request.data.decode('utf-8'))
     req = db.session.execute(f"DELETE FROM slangs WHERE id = '{id}'")
