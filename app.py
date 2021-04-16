@@ -8,6 +8,10 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 db = SQLAlchemy(app)
 
+@app.route('/')
+def index():
+    return "Jst srvr"
+
 @app.route('/api/get')
 def slangsGet():
     return json.dumps({'status': '200', 'data': db.session.execute("SELECT * FROM slangs")})
@@ -19,7 +23,8 @@ def slangAdd():
     db.session.execute("SELECT slangs FROM users WHERE label = '{label}'")
     if(db.session.fetchone() is None):
         req = db.session.execute(f"INSERT INTO slangs VALUES (?, ?, ?, ?)", (data["label"], data["description"], data["id"], "YES"))
-        else: return json.dumps({'status': '405'})
+        else:
+            return json.dumps({'status': '405'})
     db.session.commit()
     return json.dumps({'status': '200'})
 
