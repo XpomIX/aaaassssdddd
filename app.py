@@ -23,17 +23,15 @@ def slangAdd():
     db.session.execute("SELECT slangs FROM users WHERE label = '{label}'")
     if(db.session.fetchone() is None):
         req = db.session.execute(f"INSERT INTO slangs VALUES (?, ?, ?, ?)", (data["label"], data["description"], data["id"], "YES"))
-        else:
-            return json.dumps({'status': '405'})
+    else:
+        return json.dumps({'status': '405'})
     db.session.commit()
     return json.dumps({'status': '200'})
 
 @app.route('/api/del', methods=['POST'])
 def slangDelete():
     id = json.loads(request.data.decode('utf-8'))
-    if not req:
-        return json.dumps({'status': '404', 'error': f'Slang {ID} не существует'})
-    req = db.session.execute(f"DELETE FROM slangs WHERE id = '{ID}'")
+    req = db.session.execute(f"DELETE FROM slangs WHERE id = '{id}'")
     db.session.commit()
     return json.dumps({'status': '200'})
 
