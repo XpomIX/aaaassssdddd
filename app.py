@@ -12,11 +12,11 @@ cors = CORS(app, resources={
         "origins": "*"
     }
 })
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
 db = SQLAlchemy(app)
 
 @app.route('/')
-@cross_origin()
 def index():
     return "Jst srvr"
 
