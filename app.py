@@ -10,7 +10,7 @@ db = SQLAlchemy(app)
 
 @app.route('/api/get')
 def slangsGet():
-    return json.dumps({'status': '200', 'data': db.session.execute("SELECT * FROM Slangs")})
+    return json.dumps({'status': '200', 'data': db.session.execute("SELECT * FROM slangs")})
 
 @app.route('/api/add', methods=['POST'])
 def slangAdd():
